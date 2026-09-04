@@ -1,6 +1,6 @@
-# Desafio Inferência Causal
+# E-Commerce - Effect of an Intervention - Causal Inference (Dif-in-Dif + Propensity Score Matching)
 
-<img src = "img\magalu.jpg">
+<img src = "img\ecommerce-platform.jpg">
 
 ## Table of Contents
 
@@ -16,13 +16,13 @@
 - [References](#references)
 
 ## Overview
-This document provides an overview of key causal inference concepts and their relevance to analyzing user behavior at Magalu.
+This document provides an overview of key causal inference concepts and their relevance to analyzing user behavior on an e-commerce platform.
 
 ## The Causal Inference Scenario
 
 *The underlying question when want to work with Program Evaluation is to be able to find causal inference (as with Econometrics in general): What is the outcome (Y) of the treated group after the treatment was perfomed, had they not been treated?*
 
-Magalu's scenario mirrors a typical observational study setup. Due to operational constraints, a randomized controlled trial (RCT) was not feasible to assess the causal impact of a new recommendation algorithm on user engagement and sales. 
+The e-commerce platform's scenario mirrors a typical observational study setup. Due to operational constraints, a randomized controlled trial (RCT) was not feasible to assess the causal impact of a new recommendation algorithm on user engagement and sales. 
 
 Instead, the algorithm was implemented for a subset of users, selected based on their historical purchase patterns and navigation behavior. 
 
@@ -49,7 +49,7 @@ Let's start with some definitions and evaluate how they are related to (and how 
     - [Research Design](#research-design)
     - [Data Structure](#data-structure)
     - [Unit of Observation](#unit-of-observation)
-    - [The Magalu Project](#the-magalu-project)
+    - [The E-commerce Platform Project](#the-e-commerce-platform-project)
 - [Random Variables](#random-variables)
 - [Probability Distribution of Random Variables](#probability-distribution-of-random-variables)
 - [Random Sample](#random-sample)
@@ -104,9 +104,9 @@ This panel data structure is critical for methods like **Difference-in-Differenc
 
 ### **Unit of Observation**
 * **Definition**: *Unit of Observation* refers to the entity for which data is collected at each time point.
-* For this project, we are observing Magalu's **users**. Therefore, we have **user-level** data over two periods of time.
+* For this project, we are observing the e-commerce platform's **users**. Therefore, we have **user-level** data over two periods of time.
 
-### The Magalu Project
+### The E-commerce Platform Project
 
 * We face Observational data of the Causal type, due to the nature of the research question:
     * We are evaluating the causal effect of an intervention (e.g., exposure to a new algorithm) using treated and control groups. 
@@ -116,7 +116,7 @@ This panel data structure is critical for methods like **Difference-in-Differenc
 ## Random Variables
 **Definition**: In Statistical or Machine Learning terms, Random Variables represent **features** or attributes of the data.
 
-**Example in Magalu Context**
+**Example in E-commerce Platform Context**
 
 * $X_1$: user_id
 * $X_2$: time
@@ -167,12 +167,12 @@ There are two key aspects to consider when discussing independence: **Marginal I
 * **Marginal Independence**
     
     Focuses on the distributions of individual random variables.
-    * *Magalu's example*: Variables like `Histórico Compras` and `Engajamento` might not be marginally independent. For example, **higher spending users may also engage more with the platform**.
+    * *E-commerce platform example*: Variables like `Histórico Compras` and `Engajamento` might not be marginally independent. For example, **higher spending users may also engage more with the platform**.
 
 * **Joint Independence**
 
     Extends Marginal Independence to all possible subsets of random variables and ensures that their joint distribution is the product of their marginal distributions.
-    * *Magalu's example*: Variables such as `Frequência de Acesso`, `Engajamento`, and `Vendas` are unlikely to be jointly independent because **access frequency likely influences engagement, which in turn impacts sales**.
+    * *E-commerce platform example*: Variables such as `Frequência de Acesso`, `Engajamento`, and `Vendas` are unlikely to be jointly independent because **access frequency likely influences engagement, which in turn impacts sales**.
 
 ### Identical Distribution
 $$
@@ -185,7 +185,7 @@ $$
 
 It ensures that all random variables in the sample are drawn from the same probability distribution. This assumption is crucial because it guarantees that the behavior of the random variables is consistent and comparable.
 
-* *Magalu's example*:
+* *E-commerce platform example*:
     * In this project, **identical distribution** means that every observation (every **user** row in the dataset) comes from the same underlying "data-generating process" (or the same *population*). 
     * In simple terms, this assumes that all users (observations on each `user_id`) behave similarly in terms of how their features (like `Frequência de Acesso`, `Engajamento`, or `Vendas`) are distributed.
 
